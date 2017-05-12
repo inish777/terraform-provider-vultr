@@ -126,6 +126,11 @@ func resourceVultrServer() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
+			"host": &schema.Schema{
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
 		},
 	}
 }
@@ -166,6 +171,10 @@ func resourceVultrServerCreate(d *schema.ResourceData, meta interface{}) error {
 
 	if attr, ok := d.GetOk("snapshot"); ok {
 		options.Snapshot = attr.(string)
+	}
+
+	if attr, ok := d.GetOk("host"); ok {
+		options.Hostname = attr.(string)
 	}
 
 	sshKeyIdsLen := d.Get("ssh_key_ids.#").(int)
