@@ -113,6 +113,11 @@ func resourceVultrServer() *schema.Resource {
 				Type:     schema.TypeBool,
 				Optional: true,
 			},
+
+			"script_id": &schema.Schema{
+				Type:     schema.TypeInt,
+				Optional: true,
+			},
 		},
 	}
 }
@@ -141,6 +146,10 @@ func resourceVultrServerCreate(d *schema.ResourceData, meta interface{}) error {
 
 	if attr, ok := d.GetOk("auto_backups"); ok {
 		options.AutoBackups = attr.(bool)
+	}
+
+	if attr, ok := d.GetOk("script_id"); ok {
+		options.Script = attr.(int)
 	}
 
 	sshKeyIdsLen := d.Get("ssh_key_ids.#").(int)
