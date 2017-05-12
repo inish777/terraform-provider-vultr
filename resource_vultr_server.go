@@ -118,6 +118,14 @@ func resourceVultrServer() *schema.Resource {
 				Type:     schema.TypeInt,
 				Optional: true,
 			},
+			"tag": &schema.Schema{
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+			"snapshot": &schema.Schema{
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 		},
 	}
 }
@@ -150,6 +158,14 @@ func resourceVultrServerCreate(d *schema.ResourceData, meta interface{}) error {
 
 	if attr, ok := d.GetOk("script_id"); ok {
 		options.Script = attr.(int)
+	}
+
+	if attr, ok := d.GetOk("tag"); ok {
+		options.Tag = attr.(string)
+	}
+
+	if attr, ok := d.GetOk("snapshot"); ok {
+		options.Snapshot = attr.(string)
 	}
 
 	sshKeyIdsLen := d.Get("ssh_key_ids.#").(int)
