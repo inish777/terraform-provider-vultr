@@ -16,7 +16,6 @@ Setup the Go workspace:
 	git clone https://github.com/rgl/terraform-provider-vultr src/github.com/rgl/terraform-provider-vultr
 	export GOPATH=$PWD
 	export PATH=$PWD/bin:$PATH
-	hash -r # reset bash path
 
 Get the dependencies:
 
@@ -31,7 +30,7 @@ Build and test:
 
 Copy it to the final directory:
 
-	cp terraform-provider-vultr* $GOPATH/bin
+	go install
 
 Try the example:
 
